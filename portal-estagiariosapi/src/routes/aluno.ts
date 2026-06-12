@@ -45,4 +45,14 @@ router.put("/:id", async(req, res) => {
   res.json(aluno);
 });
 
+router.delete("/:id", async (req, res) => {
+  const id = Number(req.params.id);
+
+  const resultado = await alunoService.delete(id);
+
+  res.json(resultado);
+});
+
+
 export default router;
+
