@@ -18,4 +18,9 @@ export class AlunoService {
   async update(id: number, data: any) {
     return await this.repository.update(id, data);
   };
+
+  async delete(id: number) {
+  return await this.repository.delete(id);
+  };
 }
+

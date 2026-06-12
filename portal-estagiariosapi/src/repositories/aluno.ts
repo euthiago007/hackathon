@@ -51,4 +51,15 @@ async update(id: number, data: any) {
  
 }
 
+async delete(id: number) {
+  await pool.query(
+    "DELETE FROM alunos WHERE id = ?",
+    [id]
+  );
+
+  return {
+    message: "Aluno removido com sucesso"
+  };
+}
+
 }
