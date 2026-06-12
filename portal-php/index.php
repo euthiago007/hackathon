@@ -30,8 +30,8 @@
             para estudantes da UniALFA.
         </p>
 
-        <a href="#" class="btn">Ver Vagas</a>
-        <a href="#" class="btn">Área da Empresa</a>
+       <a href="portal-aluno/vagas.php" class="btn">Ver Vagas</a>
+       <a href="portal-empresa/dashboard.php" class="btn">Área da Empresa</a>
     </div>
 
 </div>

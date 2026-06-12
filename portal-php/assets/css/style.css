@@ -72,3 +72,32 @@ footer{
     padding:15px;
     margin-top:50px;
 }
+
+.card-vaga{
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.card-vaga h2{
+    color:#003366;
+    margin-bottom:10px;
+}
+
+.card-vaga p{
+    margin-bottom:15px;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+label{
+    font-weight:bold;
+}
