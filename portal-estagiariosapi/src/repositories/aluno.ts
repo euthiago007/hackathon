@@ -23,4 +23,13 @@ export class AlunoRepository {
 
     return result;
   }
+
+  async findById(id: number) {
+  const [rows]: any = await pool.query(
+    "SELECT * FROM alunos WHERE id = ?",
+    [id]
+  );
+
+  return rows[0];
+}
 }
