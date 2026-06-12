@@ -35,4 +35,14 @@ router.get("/:id", async( req, res ) =>{
 
 })
 
+router.put("/:id", async(req, res) => {
+  const id = Number(req.params.id);
+
+  const data = req.body; 
+
+  const aluno = await alunoService.update(id, data);
+  
+  res.json(aluno);
+});
+
 export default router;

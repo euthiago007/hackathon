@@ -32,4 +32,23 @@ export class AlunoRepository {
 
   return rows[0];
 }
+
+async update(id: number, data: any) {
+  const {nome, email, matricula, curso} = data;
+ await pool.query(
+  `UPDATE alunos
+     SET nome = ?,
+         email = ?,
+         matricula = ?,
+         curso = ?
+     WHERE id = ?`,
+  [nome, email, matricula, curso, id]
+ 
+  );
+  return {
+    message: "Aluno atualizado com sucesso"
+  }
+ 
+}
+
 }

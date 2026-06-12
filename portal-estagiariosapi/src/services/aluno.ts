@@ -14,4 +14,8 @@ export class AlunoService {
   async findById(id: number) {
     return await this.repository.findById(id);
   }
+
+  async update(id: number, data: any) {
+    return await this.repository.update(id, data);
+  };
 }
