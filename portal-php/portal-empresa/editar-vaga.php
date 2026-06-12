@@ -47,6 +47,12 @@
                 Atualizar Vaga
             </button>
 
+            <br><br>
+
+            <a href="minhas-vagas" class="btn">
+                Voltar
+            </a>
+
         </form>
 
     </div>

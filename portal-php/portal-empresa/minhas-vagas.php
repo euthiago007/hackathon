@@ -52,6 +52,10 @@ $vagas = [
 
     <?php endforeach; ?>
 
+    <a href="dashboard.php" class="btn">
+        Voltar ao Painel
+    </a>
+
 </div>
 
 </body>

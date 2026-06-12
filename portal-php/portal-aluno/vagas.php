@@ -54,6 +54,10 @@ $vagas = [
 
     <?php endforeach; ?>
 
+        <a href="../index.php" class="btn">
+            Voltar ao Início
+        </a>
+
 </div>
 
 </body>

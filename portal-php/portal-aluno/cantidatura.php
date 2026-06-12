@@ -39,6 +39,12 @@
                 Enviar Candidatura
             </button>
 
+            <br><br>
+
+            <a href="descricao-vaga.php" class="btn">
+                Voltar
+            </a>
+
         </form>
 
     </div>

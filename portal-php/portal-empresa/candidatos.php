@@ -45,6 +45,10 @@ $candidatos = [
         </div>
 
     <?php endforeach; ?>
+        
+    <a href="minhas-vagas.php" class="btn">
+        Voltar às Vagas
+    </a>
 
 </div>
 

@@ -39,6 +39,12 @@
                 Salvar Vaga
             </button>
 
+            <br><br>
+
+            <a href="dashboard.php" class="btn">
+                Cancelar
+            </a>
+
         </form>
 
     </div>
