@@ -1,0 +1,19 @@
+<project>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.faculdade</groupId>
+    <artifactId>portal-estagio</artifactId>
+    <version>1.0</version>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>9.3.0</version>
+        </dependency>
+
+    </dependencies>
+
+</project>
