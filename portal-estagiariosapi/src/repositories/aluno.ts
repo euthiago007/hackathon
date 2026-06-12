@@ -23,4 +23,32 @@ export class AlunoRepository {
 
     return result;
   }
+
+  async findById(id: number) {
+  const [rows]: any = await pool.query(
+    "SELECT * FROM alunos WHERE id = ?",
+    [id]
+  );
+
+  return rows[0];
+}
+
+async update(id: number, data: any) {
+  const {nome, email, matricula, curso} = data;
+ await pool.query(
+  `UPDATE alunos
+     SET nome = ?,
+         email = ?,
+         matricula = ?,
+         curso = ?
+     WHERE id = ?`,
+  [nome, email, matricula, curso, id]
+ 
+  );
+  return {
+    message: "Aluno atualizado com sucesso"
+  }
+ 
+}
+
 }
