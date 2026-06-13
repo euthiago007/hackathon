@@ -101,3 +101,35 @@ textarea{
 label{
     font-weight:bold;
 }
+.msg-sucesso {
+    background: #d4edda;
+    color: #155724;
+    padding: 12px 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.msg-erro {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 12px 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.btn-danger {
+    background: #cc0000;
+}
+
+.btn-danger:hover {
+    background: #990000;
+}
+
+select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 8px;
+}
