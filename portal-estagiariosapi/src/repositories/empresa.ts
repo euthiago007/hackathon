@@ -59,4 +59,15 @@ async delete(id: number) {
     message: "Empresa removida com sucesso"
   };
 }
+
+async login(email: string, senha: string) {
+  const [rows] = await pool.query(
+    `SELECT * FROM empresas
+     WHERE email = ?
+     AND senha = ?`,
+    [email, senha]
+  );
+
+  return (rows as any[])[0];
+};
 }
