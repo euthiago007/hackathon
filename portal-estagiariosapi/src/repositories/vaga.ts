@@ -92,4 +92,7 @@ async delete(id: number) {
     message: "Vaga removida com sucesso"
   };
 }
+
+
+
 }
