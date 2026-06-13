@@ -3,6 +3,7 @@ package com.unialfa;
 
 import com.unialfa.gui.PrincipalGui;
 
+import com.unialfa.gui.AlunoGUI;
 import javax.swing.SwingUtilities;
 
 
