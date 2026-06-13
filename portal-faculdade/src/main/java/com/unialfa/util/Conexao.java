@@ -20,8 +20,6 @@ public class Conexao {
             e.printStackTrace();
         }
 
-        System.out.println("Tentando conectar...");
-
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 }

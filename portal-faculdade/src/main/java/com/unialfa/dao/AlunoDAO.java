@@ -11,14 +11,15 @@ public class AlunoDAO {
     public void inserir(Aluno a) {
 
         System.out.println("Entrou no DAO");
-        String sql = "INSERT INTO alunos (nome, matricula, apto) VALUES (?, ?, ?)";
+
+        String sql = "INSERT INTO alunos (aluno_id, vaga_id, status) VALUES (?, ?, ?)";
 
         try (Connection conn = Conexao.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, a.getNome());
-            stmt.setString(2, a.getMatricula());
-            stmt.setBoolean(3, a.isApto());
+            stmt.setInt(1, a.getAlunoId());
+            stmt.setInt(2, a.getVagaId());
+            stmt.setString(3, a.getStatus());
 
             stmt.executeUpdate();
 
@@ -27,7 +28,6 @@ public class AlunoDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public List<Aluno> listar() {
@@ -41,11 +41,14 @@ public class AlunoDAO {
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
+
                 Aluno a = new Aluno();
+
                 a.setId(rs.getInt("id"));
-                a.setNome(rs.getString("nome"));
-                a.setMatricula(rs.getString("matricula"));
-                a.setApto(rs.getBoolean("apto"));
+                a.setAlunoId(rs.getInt("aluno_id"));
+                a.setVagaId(rs.getInt("vaga_id"));
+                a.setStatus(rs.getString("status"));
+                a.setCreatedAt(rs.getString("created_at"));
 
                 lista.add(a);
             }
