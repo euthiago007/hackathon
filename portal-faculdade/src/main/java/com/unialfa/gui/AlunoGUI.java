@@ -1,14 +1,16 @@
 package com.unialfa.gui;
 
 import javax.swing.*;
+
 import com.unialfa.dao.AlunoDAO;
 import com.unialfa.model.Aluno;
 
-public class AlunoGUI extends JFrame{
-    JTextField txtAlunoId = new JTextField();
-    JTextField txtVagaId = new JTextField();
-    JTextField txtStatus = new JTextField("data de emissão");
-    JTextField txtCreatedAt = new JTextField();
+public class AlunoGUI extends JFrame {
+
+    private JTextField txtNome = new JTextField();
+    private JTextField txtMatricula = new JTextField();
+    private JCheckBox chkApto = new JCheckBox("Apto");
+
     private JButton btnSalvar = new JButton("Salvar");
 
     private AlunoDAO dao = new AlunoDAO();
@@ -16,38 +18,27 @@ public class AlunoGUI extends JFrame{
     public AlunoGUI() {
 
         setTitle("Cadastro de Aluno");
-        setSize(300, 250);
+        setSize(350, 250);
         setLayout(null);
 
-        JLabel lblAlunoId = new JLabel("Aluno ID:");
-        lblAlunoId.setBounds(10, 10, 80, 25);
-        add(lblAlunoId);
+        JLabel lblNome = new JLabel("Nome:");
+        lblNome.setBounds(10, 10, 100, 25);
+        add(lblNome);
 
-        txtAlunoId.setBounds(10, 35, 200, 25);
-        add(txtAlunoId);
+        txtNome.setBounds(10, 35, 250, 25);
+        add(txtNome);
 
-        JLabel lblVagaId = new JLabel("Vaga ID:");
-        lblVagaId.setBounds(10, 65, 80, 25);
-        add(lblVagaId);
+        JLabel lblMatricula = new JLabel("Matrícula:");
+        lblMatricula.setBounds(10, 70, 100, 25);
+        add(lblMatricula);
 
-        txtVagaId.setBounds(10, 90, 200, 25);
-        add(txtVagaId);
+        txtMatricula.setBounds(10, 95, 250, 25);
+        add(txtMatricula);
 
-        JLabel lblStatus = new JLabel("Status:");
-        lblStatus.setBounds(10, 120, 80, 25);
-        add(lblStatus);
+        chkApto.setBounds(10, 130, 100, 25);
+        add(chkApto);
 
-        txtStatus.setBounds(10, 145, 200, 25);
-        add(txtStatus);
-
-        JLabel lblCreatedAt = new JLabel("Criado em:");
-        lblCreatedAt.setBounds(10, 175, 80, 25);
-        add(lblCreatedAt);
-
-        txtCreatedAt.setBounds(10, 200, 200, 25);
-        add(txtCreatedAt);
-
-        btnSalvar.setBounds(10, 240, 100, 30);
+        btnSalvar.setBounds(10, 165, 100, 30);
         add(btnSalvar);
 
         btnSalvar.addActionListener(e -> salvar());
@@ -57,17 +48,15 @@ public class AlunoGUI extends JFrame{
     }
 
     private void salvar() {
-        System.out.println("Botão clicado");
 
         Aluno a = new Aluno();
-        a.setAlunoId(Integer.parseInt(txtAlunoId.getText()));
-        a.setVagaId(Integer.parseInt(txtVagaId.getText()));
-        a.setStatus(txtStatus.getText());
+
+        a.setNome(txtNome.getText());
+        a.setMatricula(txtMatricula.getText());
+        a.setApto(chkApto.isSelected());
 
         dao.inserir(a);
 
         JOptionPane.showMessageDialog(this, "Aluno salvo!");
     }
 }
-
-
