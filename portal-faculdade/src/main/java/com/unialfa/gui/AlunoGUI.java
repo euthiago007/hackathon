@@ -1,7 +1,6 @@
 package com.unialfa.gui;
 
 import javax.swing.*;
-
 import com.unialfa.dao.AlunoDAO;
 import com.unialfa.model.Aluno;
 
@@ -14,6 +13,7 @@ public class AlunoGUI extends JFrame {
     private JCheckBox chkApto = new JCheckBox("Apto");
 
     private JButton btnSalvar = new JButton("Salvar");
+    private JButton btnListar = new JButton("Listar");
 
     private AlunoDAO dao = new AlunoDAO();
 
@@ -75,6 +75,11 @@ public class AlunoGUI extends JFrame {
 
         btnSalvar.addActionListener(e -> salvar());
 
+        btnListar.setBounds(150, 290, 120, 35);
+        add(btnListar);
+
+        btnListar.addActionListener(e -> new ListarAlunoGUI());
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
@@ -93,4 +98,6 @@ public class AlunoGUI extends JFrame {
 
         JOptionPane.showMessageDialog(this, "Aluno salvo!");
     }
+
+
 }
