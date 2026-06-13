@@ -2,7 +2,29 @@ import { pool } from "../config/database";
 
 export class CandidaturaRepository {
 
-    async findAll() {
+async findAll(
+  aluno_id?: number,
+  vaga_id?: number
+) {
+
+  if (aluno_id) {
+    const [rows] = await pool.query(
+      "SELECT * FROM candidaturas WHERE aluno_id = ?",
+      [aluno_id]
+    );
+
+    return rows;
+  }
+
+  if (vaga_id) {
+    const [rows] = await pool.query(
+      "SELECT * FROM candidaturas WHERE vaga_id = ?",
+      [vaga_id]
+    );
+
+    return rows;
+  }
+
   const [rows] = await pool.query(
     "SELECT * FROM candidaturas"
   );
@@ -77,4 +99,6 @@ async delete(id: number) {
     message: "Candidatura removida com sucesso"
   };
 }
+
+
 }
