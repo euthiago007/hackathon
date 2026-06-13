@@ -1,7 +1,6 @@
 package com.unialfa;
 
 import com.unialfa.gui.AlunoGUI;
-
 import javax.swing.SwingUtilities;
 import com.unialfa.gui.EmpresaGui;
 

@@ -1,20 +1,19 @@
 package com.unialfa.dao;
 
+import com.unialfa.model.Candidatura;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.unialfa.model.Candidatura;
-import com.unialfa.util.Conexao;
-
-public class CandidaturaDAO {
+public class CandidaturaDAO extends Dao {
 
     public void inserir(Candidatura c) {
 
         String sql =
                 "INSERT INTO candidaturas (aluno_id, vaga_id, status, created_at) VALUES (?, ?, ?, ?)";
 
-        try (Connection conn = Conexao.conectar();
+        try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, c.getAlunoId());
@@ -35,7 +34,7 @@ public class CandidaturaDAO {
 
         String sql = "SELECT * FROM candidaturas";
 
-        try (Connection conn = Conexao.conectar();
+        try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 

@@ -1,23 +1,29 @@
 package com.unialfa.dao;
 
-import java.sql.*;
-import java.util.List;
-import java.util.ArrayList;
 import com.unialfa.model.Aluno;
-import com.unialfa.util.Conexao;
 
-public class AlunoDAO {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
+
+public class AlunoDAO extends Dao {
+
     public void inserir(Aluno a) {
 
         String sql =
-                "INSERT INTO alunos (nome, matricula, apto_estagio) VALUES (?, ?, ?)";
+                "INSERT INTO alunos (nome, email, matricula, curso, apto_estagio) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = Conexao.conectar();
+        try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, a.getNome());
-            stmt.setString(2, a.getMatricula());
-            stmt.setBoolean(3, a.isApto());
+            stmt.setString(2, a.getEmail());
+            stmt.setString(3, a.getMatricula());
+            stmt.setString(4, a.getCurso());
+            stmt.setBoolean(5, a.isApto());
 
             stmt.executeUpdate();
 
@@ -25,24 +31,27 @@ public class AlunoDAO {
             e.printStackTrace();
         }
     }
+
     public List<Aluno> listar() {
 
         List<Aluno> lista = new ArrayList<>();
 
-        String sql = "SELECT * FROM alunos";
+        try {
 
-        try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+            ResultSet resultSet = getConnection()
+                    .prepareStatement("SELECT * FROM alunos")
+                    .executeQuery();
 
-            while (rs.next()) {
+            while (resultSet.next()) {
 
                 Aluno a = new Aluno();
 
-                a.setId(rs.getInt("id"));
-                a.setNome(rs.getString("nome"));
-                a.setMatricula(rs.getString("matricula"));
-                a.setApto(rs.getBoolean("apto"));
+                a.setId(resultSet.getInt("id"));
+                a.setNome(resultSet.getString("nome"));
+                a.setEmail(resultSet.getString("email"));
+                a.setMatricula(resultSet.getString("matricula"));
+                a.setCurso(resultSet.getString("curso"));
+                a.setApto(resultSet.getBoolean("apto_estagio"));
 
                 lista.add(a);
             }
