@@ -14,8 +14,8 @@ public class EmpresaDao extends Dao {
     public List<Empresa> listar() throws SQLException {
         List<Empresa> empresas = new ArrayList<>();
 
-        var resultSet = getConnection()
-                .prepareStatement("select * from empresa")
+        ResultSet resultSet = getConnection()
+                .prepareStatement("select * from empresas")
                 .executeQuery();
 
 
@@ -36,9 +36,9 @@ public class EmpresaDao extends Dao {
 
 
     public void atualizarStatus(Long id, StatusEmpresa status) throws SQLException {
-        var sql = "UPDATE empresa SET status=? WHERE id=?";
+        String sql = "UPDATE empresas SET status=? WHERE id=?";
 
-        var ps = getConnection().prepareStatement(sql);
+        java.sql.PreparedStatement ps = getConnection().prepareStatement(sql);
 
         ps.setString(1, status.name()); // enum → String
         ps.setLong(2, id);

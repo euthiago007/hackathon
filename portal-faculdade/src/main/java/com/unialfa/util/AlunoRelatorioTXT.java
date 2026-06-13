@@ -24,9 +24,10 @@ public class AlunoRelatorioTXT {
 
             for (Aluno a : alunos) {
                 writer.println("ID: " + a.getId());
-                writer.println("Nome: " + a.getNome());
-                writer.println("Matrícula: " + a.getMatricula());
-                writer.println("Apto: " + a.isApto());
+                writer.println("Nome: " + a.getAlunoId());
+                writer.println("Vaga para: " + a.getVagaId());
+                writer.println("Status: " + a.getStatus());
+                writer.println("Emissão: " + a.getCreatedAt());
                 writer.println("------------------------");
             }
 
