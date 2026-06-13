@@ -22,7 +22,6 @@ public class EmpresaGui extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // TABELA
         model = new DefaultTableModel(
                 new Object[]{"ID", "Nome", "CNPJ", "Email", "Status"}, 0
         );
@@ -31,21 +30,16 @@ public class EmpresaGui extends JFrame {
 
         add(new JScrollPane(tabela), BorderLayout.CENTER);
 
-        // BOTÕES
         JPanel panel = new JPanel();
 
-        JButton btnAtualizar = new JButton("Atualizar");
         JButton btnAprovar = new JButton("Aprovar");
         JButton btnBloquear = new JButton("Bloquear");
 
-        panel.add(btnAtualizar);
         panel.add(btnAprovar);
         panel.add(btnBloquear);
 
         add(panel, BorderLayout.SOUTH);
 
-        // AÇÕES
-        btnAtualizar.addActionListener(e -> carregar());
 
         btnAprovar.addActionListener(e -> alterar(StatusEmpresa.APROVADA));
         btnBloquear.addActionListener(e -> alterar(StatusEmpresa.BLOQUEADA));
@@ -53,7 +47,6 @@ public class EmpresaGui extends JFrame {
         carregar();
     }
 
-    // CARREGAR TABELA
     private void carregar() {
         try {
             model.setRowCount(0);
@@ -75,7 +68,6 @@ public class EmpresaGui extends JFrame {
         }
     }
 
-    // ALTERAR STATUS
     private void alterar(StatusEmpresa status) {
         try {
             int row = tabela.getSelectedRow();

@@ -5,7 +5,7 @@ public class Candidatura {
     private int id;
     private int alunoId;
     private int vagaId;
-    private String status;
+    private StatusCandidatura status;
     private String createdAt;
 
     public int getId() {
@@ -32,11 +32,11 @@ public class Candidatura {
         this.vagaId = vagaId;
     }
 
-    public String getStatus() {
+    public StatusCandidatura getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(StatusCandidatura status) {
         this.status = status;
     }
 

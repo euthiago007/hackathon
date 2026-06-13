@@ -25,4 +25,8 @@ async update(id: number, data: any) {
 async delete(id: number) {
   return await this.repository.delete(id);
 }
+
+async login(email: string, senha: string) {
+  return await this.repository.login(email, senha);
+}
 }

@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CandidaturaDAO extends Dao {
+import com.unialfa.model.Candidatura;
+import com.unialfa.model.StatusCandidatura;
+import com.unialfa.util.Conexao;
+
+public class CandidaturaDAO {
 
     public void inserir(Candidatura c) {
 
@@ -18,7 +23,7 @@ public class CandidaturaDAO extends Dao {
 
             stmt.setInt(1, c.getAlunoId());
             stmt.setInt(2, c.getVagaId());
-            stmt.setString(3, c.getStatus());
+            stmt.setString(3, c.getStatus().name());
             stmt.setString(4, c.getCreatedAt());
 
             stmt.executeUpdate();
@@ -45,7 +50,7 @@ public class CandidaturaDAO extends Dao {
                 c.setId(rs.getInt("id"));
                 c.setAlunoId(rs.getInt("aluno_id"));
                 c.setVagaId(rs.getInt("vaga_id"));
-                c.setStatus(rs.getString("status"));
+                c.setStatus(StatusCandidatura.valueOf(rs.getString("status")));
                 c.setCreatedAt(rs.getString("created_at"));
 
                 lista.add(c);
