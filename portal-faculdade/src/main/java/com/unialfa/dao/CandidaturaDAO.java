@@ -1,25 +1,23 @@
 package com.unialfa.dao;
 
 import com.unialfa.model.Candidatura;
+import com.unialfa.model.StatusCandidatura;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CandidaturaDAO extends Dao {
-import com.unialfa.model.Candidatura;
-import com.unialfa.model.StatusCandidatura;
-import com.unialfa.util.Conexao;
-
-public class CandidaturaDAO {
 
     public void inserir(Candidatura c) {
 
         String sql =
                 "INSERT INTO candidaturas (aluno_id, vaga_id, status, created_at) VALUES (?, ?, ?, ?)";
 
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try {
+
+            PreparedStatement stmt =
+                    getConnection().prepareStatement(sql);
 
             stmt.setInt(1, c.getAlunoId());
             stmt.setInt(2, c.getVagaId());
@@ -27,6 +25,8 @@ public class CandidaturaDAO {
             stmt.setString(4, c.getCreatedAt());
 
             stmt.executeUpdate();
+
+            stmt.close();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -37,11 +37,14 @@ public class CandidaturaDAO {
 
         List<Candidatura> lista = new ArrayList<>();
 
-        String sql = "SELECT * FROM candidaturas";
+        try {
 
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+            PreparedStatement stmt =
+                    getConnection().prepareStatement(
+                            "SELECT * FROM candidaturas"
+                    );
+
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
 
@@ -50,11 +53,18 @@ public class CandidaturaDAO {
                 c.setId(rs.getInt("id"));
                 c.setAlunoId(rs.getInt("aluno_id"));
                 c.setVagaId(rs.getInt("vaga_id"));
-                c.setStatus(StatusCandidatura.valueOf(rs.getString("status")));
+                c.setStatus(
+                        StatusCandidatura.valueOf(
+                                rs.getString("status")
+                        )
+                );
                 c.setCreatedAt(rs.getString("created_at"));
 
                 lista.add(c);
             }
+
+            rs.close();
+            stmt.close();
 
         } catch (Exception e) {
             e.printStackTrace();
