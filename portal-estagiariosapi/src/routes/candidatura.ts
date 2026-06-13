@@ -6,7 +6,13 @@ const router = Router();
 const candidaturaService = new CandidaturaService();
 
 router.get("/", async (req, res) => {
-  const candidaturas = await candidaturaService.findAll();
+
+  const aluno_id = req.query.aluno_id
+    ? Number(req.query.aluno_id)
+    : undefined;
+
+  const candidaturas =
+    await candidaturaService.findAll(aluno_id);
 
   res.json(candidaturas);
 });
