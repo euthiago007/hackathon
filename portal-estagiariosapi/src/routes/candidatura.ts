@@ -11,8 +11,15 @@ router.get("/", async (req, res) => {
     ? Number(req.query.aluno_id)
     : undefined;
 
+  const vaga_id = req.query.vaga_id
+    ? Number(req.query.vaga_id)
+    : undefined;
+
   const candidaturas =
-    await candidaturaService.findAll(aluno_id);
+    await candidaturaService.findAll(
+      aluno_id,
+      vaga_id
+    );
 
   res.json(candidaturas);
 });
