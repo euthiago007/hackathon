@@ -19,8 +19,7 @@ public class EmpresaGui extends JFrame {
     public EmpresaGui() {
         setTitle("Gestão de Empresas");
         setSize(700, 400);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
+        setLocationRelativeTo(null);
 
         model = new DefaultTableModel(
                 new Object[]{"ID", "Nome", "CNPJ", "Email", "Status"}, 0

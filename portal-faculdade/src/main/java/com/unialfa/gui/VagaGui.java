@@ -17,7 +17,6 @@ public class VagaGui extends JFrame {
 
         setTitle("Gestão de Vagas");
         setSize(700, 400);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         model = new DefaultTableModel(
