@@ -2,7 +2,10 @@ import { pool } from "../config/database";
 
 export class CandidaturaRepository {
 
-  async findAll(aluno_id?: number) {
+async findAll(
+  aluno_id?: number,
+  vaga_id?: number
+) {
 
   if (aluno_id) {
     const [rows] = await pool.query(
@@ -13,14 +16,22 @@ export class CandidaturaRepository {
     return rows;
   }
 
+  if (vaga_id) {
+    const [rows] = await pool.query(
+      "SELECT * FROM candidaturas WHERE vaga_id = ?",
+      [vaga_id]
+    );
+
+    return rows;
+  }
+
   const [rows] = await pool.query(
     "SELECT * FROM candidaturas"
   );
 
   return rows;
-
-  
 }
+
 async create(data: any) {
     const {
   aluno_id,

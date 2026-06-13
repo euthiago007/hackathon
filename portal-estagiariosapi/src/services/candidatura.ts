@@ -3,8 +3,14 @@ import { CandidaturaRepository } from "../repositories/candidatura";
 export class CandidaturaService {
   private repository = new CandidaturaRepository();
 
-async findAll(aluno_id?: number) {
-  return this.repository.findAll(aluno_id);
+async findAll(
+  aluno_id?: number,
+  vaga_id?: number
+) {
+  return this.repository.findAll(
+    aluno_id,
+    vaga_id
+  );
 }
 
 
