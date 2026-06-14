@@ -12,7 +12,6 @@ public class ListarAlunoGUI extends JFrame {
     private JTable tabela;
     private DefaultTableModel modelo;
 
-    private JButton btnAtualizar = new JButton("Atualizar");
     private JButton btnEditar = new JButton("Editar");
 
     private AlunoDAO dao = new AlunoDAO();
@@ -42,13 +41,8 @@ public class ListarAlunoGUI extends JFrame {
 
         add(scroll);
 
-        btnAtualizar.setBounds(10, 310, 120, 30);
-        add(btnAtualizar);
-
-        btnEditar.setBounds(150, 310, 120, 30);
+        btnEditar.setBounds(310, 310, 120, 30);
         add(btnEditar);
-
-        btnAtualizar.addActionListener(e -> carregarAlunos());
 
         btnEditar.addActionListener(e -> editarAluno());
 

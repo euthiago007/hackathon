@@ -13,6 +13,36 @@ public class RelatorioService {
     private VagaDao vagaDao = new VagaDao();
     private CandidaturaDAO candidaturaDAO = new CandidaturaDAO();
 
+    public void relatorioAlunos() {
+
+        gerarRelatorio("relatorio_alunos.txt", writer -> {
+
+            List<Aluno> alunos = new AlunoDAO().listar();
+
+            StringBuilder console = new StringBuilder();
+            console.append("\n===== RELATÓRIO ALUNOS =====\n");
+
+            writer.write("===== RELATÓRIO ALUNOS =====\n");
+
+            for (Aluno a : alunos) {
+
+                String linha =
+                        "ID: " + a.getId() +
+                                " | Nome: " + a.getNome() +
+                                " | Email: " + a.getEmail() +
+                                " | Matrícula: " + a.getMatricula() +
+                                " | Curso: " + a.getCurso() + "\n";
+
+                writer.write(linha);
+                console.append(linha);
+            }
+
+            console.append("=============================\n");
+
+            System.out.println(console);
+        });
+    }
+
     public void relatorioEmpresas() {
         gerarRelatorio("relatorio_empresas.txt", writer -> {
             List<Empresa> empresas = empresaDao.listar();
@@ -51,7 +81,6 @@ public class RelatorioService {
 
             writer.write("===== RELATÓRIO VAGAS =====\n");
 
-            writer.write("=== VAGAS ===\n");
             for (Vaga v : vagas) {
                 String linha =
                         "ID: " + v.getId() +
