@@ -5,7 +5,7 @@ require_once '../config/validacao.php';
 
 $mensagem = '';
 $sucesso  = false;
-$dados    = ['nome' => '', 'email' => '', 'cnpj' => '', 'telefone' => ''];
+$dados    = ['nome' => '', 'email' => '', 'cnpj' => '', 'telefone' => '', 'senha' => ''];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dados = [
@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'email'    => trim($_POST['email']    ?? ''),
         'cnpj'     => trim($_POST['cnpj']     ?? ''),
         'telefone' => trim($_POST['telefone'] ?? ''),
+        'senha'    => trim($_POST['senha']    ?? ''),
     ];
 
     $v = new Validacao();
@@ -21,12 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       ->email('email',          $dados['email'],    'E-mail')
       ->obrigatorio('cnpj',     $dados['cnpj'],     'CNPJ')
       ->cnpj('cnpj',            $dados['cnpj'],     'CNPJ')
-      ->obrigatorio('telefone', $dados['telefone'], 'Telefone');
+      ->obrigatorio('telefone', $dados['telefone'], 'Telefone')
+      ->obrigatorio('senha',    $dados['senha'],    'Senha')
+      ->minimo('senha',         $dados['senha'],    6, 'Senha');
 
     if (!$v->valido()) {
         $mensagem = $v->getMensagem();
     } else {
-        // Usando EmpresaService corretamente em vez de chamar apiRequest direto
         $service = new EmpresaService();
         $ok      = $service->cadastrar(array_merge($dados, ['status' => 'PENDENTE']));
 
@@ -70,6 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <label for="telefone">Telefone</label><br>
             <input type="text" id="telefone" name="telefone" value="<?= htmlspecialchars($dados['telefone']) ?>" required><br><br>
+
+            <label for="senha">Senha</label><br>
+            <input type="password" id="senha" name="senha" required minlength="6"><br><br>
 
             <button type="submit" class="btn">Cadastrar</button>
             <a href="login.php" class="btn">Voltar</a>
