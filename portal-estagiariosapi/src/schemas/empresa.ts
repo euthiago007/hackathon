@@ -5,5 +5,6 @@ export const empresaSchema = z.object({
   cnpj: z.string(),
   email: z.email(),
   telefone: z.string(),
-  status: z.string()
+  status: z.string(),
+  senha: z.string()
 });

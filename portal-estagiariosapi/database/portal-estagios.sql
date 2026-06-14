@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 12/06/2026 às 03:08
+-- Tempo de geração: 14/06/2026 às 06:47
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -43,7 +43,6 @@ CREATE TABLE `alunos` (
 
 INSERT INTO `alunos` (`id`, `nome`, `email`, `matricula`, `curso`, `apto_estagio`, `created_at`) VALUES
 (1, 'Thiago', 'teste@email.com', '123', 'ADS', 1, '2026-06-11 01:32:13'),
-(27, 'Thiagod', 'testeeee@email.com', '1234', 'ADS', 1, '2026-06-11 02:07:19'),
 (28, 'emily', 'emylinda01@email.com', '6699', 'linda', 1, '2026-06-12 00:59:16');
 
 -- --------------------------------------------------------
@@ -73,22 +72,16 @@ CREATE TABLE `empresas` (
   `email` varchar(100) NOT NULL,
   `telefone` varchar(20) DEFAULT NULL,
   `status` enum('PENDENTE','APROVADA','BLOQUEADA') DEFAULT 'PENDENTE',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `senha` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Estrutura para tabela `notificacoes`
+-- Despejando dados para a tabela `empresas`
 --
 
-CREATE TABLE `notificacoes` (
-  `id` int(11) NOT NULL,
-  `aluno_id` int(11) NOT NULL,
-  `mensagem` text NOT NULL,
-  `lida` tinyint(1) DEFAULT 0,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `empresas` (`id`, `nome`, `cnpj`, `email`, `telefone`, `status`, `created_at`, `senha`) VALUES
+(1, 'Google', '12345678000199', 'contato@google.com', '44999999999', '', '2026-06-12 21:37:37', '');
 
 -- --------------------------------------------------------
 
@@ -135,13 +128,6 @@ ALTER TABLE `empresas`
   ADD UNIQUE KEY `cnpj` (`cnpj`);
 
 --
--- Índices de tabela `notificacoes`
---
-ALTER TABLE `notificacoes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `aluno_id` (`aluno_id`);
-
---
 -- Índices de tabela `vagas`
 --
 ALTER TABLE `vagas`
@@ -162,25 +148,19 @@ ALTER TABLE `alunos`
 -- AUTO_INCREMENT de tabela `candidaturas`
 --
 ALTER TABLE `candidaturas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `empresas`
 --
 ALTER TABLE `empresas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `notificacoes`
---
-ALTER TABLE `notificacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `vagas`
 --
 ALTER TABLE `vagas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restrições para tabelas despejadas
@@ -192,12 +172,6 @@ ALTER TABLE `vagas`
 ALTER TABLE `candidaturas`
   ADD CONSTRAINT `candidaturas_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `alunos` (`id`),
   ADD CONSTRAINT `candidaturas_ibfk_2` FOREIGN KEY (`vaga_id`) REFERENCES `vagas` (`id`);
-
---
--- Restrições para tabelas `notificacoes`
---
-ALTER TABLE `notificacoes`
-  ADD CONSTRAINT `notificacoes_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `alunos` (`id`);
 
 --
 -- Restrições para tabelas `vagas`
