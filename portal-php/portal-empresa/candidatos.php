@@ -9,7 +9,7 @@ $sucesso  = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cid    = (int) ($_POST['candidatura_id'] ?? 0);
-    $status = $_POST['status'] ?? 'pendente';
+    $status = $_POST['status'] ?? 'PENDENTE';
 
     $service = new CandidaturaService();
     $ok      = $service->atualizarStatus($cid, $status);
@@ -52,9 +52,18 @@ $candidaturas = $candService->listarPorVaga($vagaId);
                 <form method="POST" action="candidatos.php?vaga_id=<?= $vagaId ?>" style="display:inline">
                     <input type="hidden" name="candidatura_id" value="<?= $candidatura->getId() ?>">
                     <select name="status">
-                        <?php foreach (['pendente', 'aprovado', 'reprovado'] as $s): ?>
-                            <option value="<?= $s ?>" <?= $candidatura->getStatus() === $s ? 'selected' : '' ?>>
-                                <?= ucfirst($s) ?>
+                        <?php
+                        // Valores em maiúsculo igual ao ENUM do banco
+                        $opcoes = [
+                            'PENDENTE'   => 'Pendente',
+                            'EM_ANALISE' => 'Em Análise',
+                            'APROVADA'   => 'Aprovada',
+                            'REJEITADA'  => 'Rejeitada',
+                        ];
+                        foreach ($opcoes as $valor => $label):
+                        ?>
+                            <option value="<?= $valor ?>" <?= $candidatura->getStatus() === $valor ? 'selected' : '' ?>>
+                                <?= $label ?>
                             </option>
                         <?php endforeach; ?>
                     </select>

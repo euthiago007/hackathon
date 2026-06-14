@@ -12,15 +12,16 @@ class Empresa extends Usuario
         parent::__construct($id, $nome, $email);
         $this->cnpj     = $cnpj;
         $this->telefone = $telefone;
-        $this->status   = $status;
+        $this->status   = strtoupper($status); // normaliza para maiúsculo
     }
 
     public function getCnpj(): string     { return $this->cnpj; }
     public function getTelefone(): string { return $this->telefone; }
     public function getStatus(): string   { return $this->status; }
-    public function isAtiva(): bool       { return $this->status === 'aprovada'; }
 
-    // Polimorfismo — implementação específica da Empresa
+    // Banco usa ENUM maiúsculo: APROVADA, PENDENTE, BLOQUEADA
+    public function isAtiva(): bool { return $this->status === 'APROVADA'; }
+
     public function getTipoPerfil(): string { return 'Empresa'; }
     public function getAreaAcesso(): string { return 'Painel da Empresa'; }
     public function getLinkArea(): string   { return 'portal-empresa/dashboard.php'; }
@@ -33,7 +34,7 @@ class Empresa extends Usuario
                     $dados['email']     ?? '',
                     $dados['cnpj']      ?? '',
                     $dados['telefone']  ?? '',
-                    $dados['status']    ?? 'pendente'
+                    $dados['status']    ?? 'PENDENTE'
         );
     }
 }

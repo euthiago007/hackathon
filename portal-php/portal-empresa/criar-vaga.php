@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mensagem = $v->getMensagem();
     } else {
         $service = new VagaService();
-        $vaga    = $service->criar([
+        $ok      = $service->criar([
             'titulo'     => $dados['titulo'],
             'descricao'  => $dados['descricao'],
             'requisitos' => $dados['requisitos'],
@@ -37,10 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'empresa_id' => $empresaId
         ]);
 
-        if ($vaga === null && apiOffline(apiRequest('GET', '/vaga'))) {
-            $mensagem = 'Serviço indisponível no momento. Tente novamente em instantes.';
-        } elseif (!$vaga) {
-            $mensagem = 'Erro ao criar vaga. Verifique os dados e tente novamente.';
+        if (!$ok) {
+            $mensagem = 'Serviço indisponível ou erro ao criar vaga.';
         } else {
             $sucesso  = true;
             $mensagem = 'Vaga criada com sucesso!';

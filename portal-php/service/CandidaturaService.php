@@ -49,7 +49,7 @@ class CandidaturaService
         $resultado = apiRequest('POST', '/candidatura', [
             'aluno_id' => $alunoId,
             'vaga_id'  => $vagaId,
-            'status'   => 'pendente'
+            'status'   => 'PENDENTE' // maiúsculo igual ao ENUM do banco
         ]);
         return !apiOffline($resultado) && !isset($resultado['error']);
     }
@@ -62,7 +62,7 @@ class CandidaturaService
         $resultado = apiRequest('PUT', '/candidatura/' . $id, [
             'aluno_id' => $atual->getAlunoId(),
             'vaga_id'  => $atual->getVagaId(),
-            'status'   => $status
+            'status'   => strtoupper($status) // garante maiúsculo
         ]);
         return !apiOffline($resultado) && !isset($resultado['error']);
     }
