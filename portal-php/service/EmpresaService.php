@@ -14,7 +14,9 @@ class EmpresaService
     public function cadastrar(array $dados): bool
     {
         $resultado = apiRequest('POST', '/empresa', $dados);
-        return !apiOffline($resultado) && !isset($resultado['error']);
+        if (apiOffline($resultado) || isset($resultado['error'])) return false;
+        // POST /empresa retorna o objeto criado — sucesso se tiver 'id'
+        return isset($resultado['id']);
     }
 
     public function login(string $email, string $senha): ?Empresa
@@ -24,14 +26,12 @@ class EmpresaService
             'senha' => $senha
         ]);
 
-        // 401 ou erro = credenciais inválidas ou empresa bloqueada
         if (apiOffline($resultado) || isset($resultado['message']) || isset($resultado['error'])) {
             return null;
         }
 
         $empresa = Empresa::fromArray($resultado);
 
-        // Garante que só empresas aprovadas acessam — validação extra no PHP
         if (!$empresa->isAtiva()) return null;
 
         return $empresa;
