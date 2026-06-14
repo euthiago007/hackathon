@@ -1,83 +1,109 @@
 import { pool } from "../config/database";
 
-
 export class EmpresaRepository {
   async findAll() {
     const [rows] = await pool.query(
-        "SELECT * FROM empresas"
-    )
+      "SELECT * FROM empresas"
+    );
+
     return rows;
- };
+  }
 
- async create(data: any) {
-const {
-  nome,
-  cnpj,
-  email,
-  telefone,
-  status,
-  senha
-} = data;  
-  await pool.query(
-  `INSERT INTO empresas
-  (nome, cnpj, email, telefone, senha, status)
-  VALUES (?, ?, ?, ?, ?, ?)`,
-  [nome, cnpj, email, telefone, senha, status]
-);
+  async create(data: any) {
+    const {
+      nome,
+      cnpj,
+      email,
+      telefone,
+      status,
+      senha
+    } = data;
 
+    const [result]: any = await pool.query(
+      `INSERT INTO empresas
+      (nome, cnpj, email, telefone, senha, status)
+      VALUES (?, ?, ?, ?, ?, ?)`,
+      [
+        nome,
+        cnpj,
+        email,
+        telefone,
+        senha,
+        status
+      ]
+    );
 
- }
-async findById(id: number) {
     const [rows] = await pool.query(
-  "SELECT * FROM empresas WHERE id = ?",
-  [id]
+      "SELECT * FROM empresas WHERE id = ?",
+      [result.insertId]
+    );
 
-  
-);      
-return (rows as any[])[0];
+    return (rows as any[])[0];
+  }
 
-}
+  async findById(id: number) {
+    const [rows] = await pool.query(
+      "SELECT * FROM empresas WHERE id = ?",
+      [id]
+    );
 
-async update(id: number, data: any) {
-   const {
-  nome,
-  cnpj,
-  email,
-  telefone,
-  status,
-  senha
-} = data;  
-  await pool.query(
-  `INSERT INTO empresas
-  (nome, cnpj, email, telefone, senha, status)
-  VALUES (?, ?, ?, ?, ?, ?)`,
-  [nome, cnpj, email, telefone, senha, status]
-);
- return {
-  message: "Empresa atualizada com sucesso"
-};
+    return (rows as any[])[0];
+  }
 
-}
+  async update(id: number, data: any) {
+    const {
+      nome,
+      cnpj,
+      email,
+      telefone,
+      status,
+      senha
+    } = data;
 
-async delete(id: number) {
-  await pool.query(
-    "DELETE FROM empresas WHERE id = ?",
-    [id]
-  );
+    await pool.query(
+      `UPDATE empresas
+       SET nome = ?,
+           cnpj = ?,
+           email = ?,
+           telefone = ?,
+           senha = ?,
+           status = ?
+       WHERE id = ?`,
+      [
+        nome,
+        cnpj,
+        email,
+        telefone,
+        senha,
+        status,
+        id
+      ]
+    );
 
-  return {
-    message: "Empresa removida com sucesso"
-  };
-}
+    return {
+      message: "Empresa atualizada com sucesso"
+    };
+  }
 
-async login(email: string, senha: string) {
-  const [rows] = await pool.query(
-    `SELECT * FROM empresas
-     WHERE email = ?
-     AND senha = ?`,
-    [email, senha]
-  );
+  async delete(id: number) {
+    await pool.query(
+      "DELETE FROM empresas WHERE id = ?",
+      [id]
+    );
 
-  return (rows as any[])[0];
-};
+    return {
+      message: "Empresa removida com sucesso"
+    };
+  }
+
+  async login(email: string, senha: string) {
+    const [rows] = await pool.query(
+      `SELECT * FROM empresas
+       WHERE email = ?
+       AND senha = ?`,
+      [email, senha]
+    );
+
+    return (rows as any[])[0];
+  }
 }
