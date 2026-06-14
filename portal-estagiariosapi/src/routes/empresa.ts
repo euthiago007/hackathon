@@ -21,6 +21,22 @@ router.post("/", async (req, res) => {
   res.status(201).json(empresa);
 });
 
+router.post("/login", async (req, res) => {
+
+  const { email, senha } = req.body;
+
+  const empresa =
+    await empresaService.login(email, senha);
+
+  if (!empresa) {
+    return res.status(401).json({
+      message: "Email ou senha inválidos"
+    });
+  }
+
+  res.json(empresa);
+});
+
 router.get("/:id", async (req, res) => {
   const id = Number(req.params.id);
 
@@ -47,20 +63,6 @@ router.delete("/:id", async (req, res) => {
   res.json(resultado);
 });
 
-router.post("/login", async (req, res) => {
 
-  const { email, senha } = req.body;
-
-  const empresa =
-    await empresaService.login(email, senha);
-
-  if (!empresa) {
-    return res.status(401).json({
-      message: "Email ou senha inválidos"
-    });
-  }
-
-  res.json(empresa);
-});
 
 export default router;

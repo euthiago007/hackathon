@@ -10,12 +10,19 @@ export class EmpresaRepository {
  };
 
  async create(data: any) {
-   const { nome, cnpj, email, telefone, status } = data;
- await pool.query(
+const {
+  nome,
+  cnpj,
+  email,
+  telefone,
+  status,
+  senha
+} = data;  
+  await pool.query(
   `INSERT INTO empresas
-  (nome, cnpj, email, telefone, status)
-  VALUES (?, ?, ?, ?, ?)`,
-  [nome, cnpj, email, telefone, status]
+  (nome, cnpj, email, telefone, senha, status)
+  VALUES (?, ?, ?, ?, ?, ?)`,
+  [nome, cnpj, email, telefone, senha, status]
 );
 
 
@@ -32,16 +39,19 @@ return (rows as any[])[0];
 }
 
 async update(id: number, data: any) {
-    const { nome, cnpj, email, telefone, status } = data;   
-    await pool.query(
-  `UPDATE empresas
-   SET nome = ?,
-       cnpj = ?,
-       email = ?,
-       telefone = ?,
-       status = ?
-   WHERE id = ?`,
-  [nome, cnpj, email, telefone, status, id]
+   const {
+  nome,
+  cnpj,
+  email,
+  telefone,
+  status,
+  senha
+} = data;  
+  await pool.query(
+  `INSERT INTO empresas
+  (nome, cnpj, email, telefone, senha, status)
+  VALUES (?, ?, ?, ?, ?, ?)`,
+  [nome, cnpj, email, telefone, senha, status]
 );
  return {
   message: "Empresa atualizada com sucesso"
