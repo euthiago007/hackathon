@@ -22,7 +22,7 @@ public class EmpresaGui extends JFrame {
         setLocationRelativeTo(null);
 
         model = new DefaultTableModel(
-                new Object[]{"ID", "Nome", "CNPJ", "Email", "Status"}, 0
+                new Object[]{"ID", "Nome", "CNPJ", "Telefone" , "Email", "Senha", "Status"}, 0
         );
 
         tabela = new JTable(model);
@@ -57,7 +57,9 @@ public class EmpresaGui extends JFrame {
                         e.getId(),
                         e.getNome(),
                         e.getCnpj(),
+                        e.getTelefone(),
                         e.getEmail(),
+                        e.getSenha(),
                         e.getStatus()
                 });
             }

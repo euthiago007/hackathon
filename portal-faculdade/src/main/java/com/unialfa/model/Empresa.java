@@ -5,7 +5,9 @@ public class Empresa {
         private Long id;
         private String nome;
         private String cnpj;
+        private String telefone;
         private String email;
+        private String senha;
         private StatusEmpresa status;
 
     public StatusEmpresa getStatus() {
@@ -14,6 +16,22 @@ public class Empresa {
 
     public void setStatus(StatusEmpresa status) {
         this.status = status;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     public String getEmail() {
