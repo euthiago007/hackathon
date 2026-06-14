@@ -26,13 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$v->valido()) {
         $mensagem = $v->getMensagem();
     } else {
+        // Usando EmpresaService corretamente em vez de chamar apiRequest direto
         $service = new EmpresaService();
-        $resultado = apiRequest('POST', '/empresa', array_merge($dados, ['status' => 'pendente']));
+        $ok      = $service->cadastrar(array_merge($dados, ['status' => 'pendente']));
 
-        if (apiOffline($resultado)) {
-            $mensagem = 'Serviço indisponível no momento. Tente novamente em instantes.';
-        } elseif (isset($resultado['error'])) {
-            $mensagem = 'Erro ao realizar cadastro. Verifique os dados e tente novamente.';
+        if (!$ok) {
+            $mensagem = 'Serviço indisponível ou erro ao realizar cadastro.';
         } else {
             $sucesso  = true;
             $mensagem = 'Cadastro realizado! Aguarde a aprovação da UniALFA para acessar o painel.';

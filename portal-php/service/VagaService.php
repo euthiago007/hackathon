@@ -52,16 +52,17 @@ class VagaService
 
     public function criar(array $dados): ?Vaga
     {
+        // POST /vaga retorna o objeto criado
         $resultado = apiRequest('POST', '/vaga', $dados);
         if (apiOffline($resultado) || isset($resultado['error'])) return null;
         return Vaga::fromArray($resultado);
     }
 
-    public function atualizar(int $id, array $dados): ?Vaga
+    public function atualizar(int $id, array $dados): bool
     {
+        // PUT /vaga/:id retorna { message } — não tenta montar objeto
         $resultado = apiRequest('PUT', '/vaga/' . $id, $dados);
-        if (apiOffline($resultado) || isset($resultado['error'])) return null;
-        return Vaga::fromArray($resultado);
+        return !apiOffline($resultado) && !isset($resultado['error']);
     }
 
     public function excluir(int $id): bool
