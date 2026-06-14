@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // Usando EmpresaService corretamente em vez de chamar apiRequest direto
         $service = new EmpresaService();
-        $ok      = $service->cadastrar(array_merge($dados, ['status' => 'pendente']));
+        $ok      = $service->cadastrar(array_merge($dados, ['status' => 'PENDENTE']));
 
         if (!$ok) {
             $mensagem = 'Serviço indisponível ou erro ao realizar cadastro.';
