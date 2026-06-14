@@ -5,9 +5,9 @@ public class Empresa {
         private Long id;
         private String nome;
         private String cnpj;
+        private String telefone;
         private String email;
         private String senha;
-        private String telefone;
         private StatusEmpresa status;
 
     public StatusEmpresa getStatus() {
