@@ -48,6 +48,7 @@ public class ListarAlunoGUI extends JFrame {
 
         carregarAlunos();
 
+
         setVisible(true);
     }
 
