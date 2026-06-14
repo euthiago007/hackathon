@@ -8,23 +8,13 @@ $empresaId = (int) $_SESSION['empresa_id'];
 $mensagem  = '';
 $sucesso   = false;
 
-if ($id <= 0) {
-    header('Location: minhas-vagas.php');
-    exit;
-}
+if ($id <= 0) { header('Location: minhas-vagas.php'); exit; }
 
 $service = new VagaService();
 $vaga    = $service->buscarPorId($id);
 
-if (!$vaga) {
-    header('Location: minhas-vagas.php');
-    exit;
-}
-
-if ($vaga->getEmpresaId() !== $empresaId) {
-    header('Location: minhas-vagas.php');
-    exit;
-}
+if (!$vaga) { header('Location: minhas-vagas.php'); exit; }
+if ($vaga->getEmpresaId() !== $empresaId) { header('Location: minhas-vagas.php'); exit; }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titulo     = trim($_POST['titulo']     ?? '');
@@ -44,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$v->valido()) {
         $mensagem = $v->getMensagem();
     } else {
-        $atualizada = $service->atualizar($id, [
+        $ok = $service->atualizar($id, [
             'titulo'     => $titulo,
             'descricao'  => $descricao,
             'requisitos' => $requisitos,
@@ -53,12 +43,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'empresa_id' => $empresaId
         ]);
 
-        if (!$atualizada) {
+        if (!$ok) {
             $mensagem = 'Serviço indisponível ou erro ao atualizar vaga.';
         } else {
-            $vaga     = $atualizada;
             $sucesso  = true;
             $mensagem = 'Vaga atualizada com sucesso!';
+            // Recarrega os dados atualizados da API
+            $vaga = $service->buscarPorId($id) ?? $vaga;
         }
     }
 }

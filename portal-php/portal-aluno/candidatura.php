@@ -66,7 +66,7 @@ $vaga        = $vagaId > 0 ? $vagaService->buscarPorId($vagaId) : null;
         <?php endif; ?>
 
         <?php if (!$sucesso): ?>
-        <form method="POST" action="cantidatura.php">
+        <form method="POST" action="candidatura.php">
             <input type="hidden" name="vaga_id" value="<?= $vagaId ?>">
 
             <label for="aluno_id">Seu ID de Aluno</label><br>
