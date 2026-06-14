@@ -25,7 +25,9 @@ public class EmpresaDao extends Dao {
             e.setId(resultSet.getLong("id"));
             e.setNome(resultSet.getString("nome"));
             e.setCnpj(resultSet.getString("cnpj"));
+            e.setTelefone(resultSet.getString("telefone"));
             e.setEmail(resultSet.getString("email"));
+            e.setSenha(resultSet.getString("senha"));
             e.setStatus(StatusEmpresa.valueOf(resultSet.getString("status")));
 
             empresas.add(e);
@@ -40,7 +42,7 @@ public class EmpresaDao extends Dao {
 
         java.sql.PreparedStatement ps = getConnection().prepareStatement(sql);
 
-        ps.setString(1, status.name()); // enum → String
+        ps.setString(1, status.name());
         ps.setLong(2, id);
 
         ps.execute();

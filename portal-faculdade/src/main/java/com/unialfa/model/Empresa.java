@@ -6,6 +6,8 @@ public class Empresa {
         private String nome;
         private String cnpj;
         private String email;
+        private String senha;
+        private String telefone;
         private StatusEmpresa status;
 
     public StatusEmpresa getStatus() {
@@ -14,6 +16,22 @@ public class Empresa {
 
     public void setStatus(StatusEmpresa status) {
         this.status = status;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     public String getEmail() {
