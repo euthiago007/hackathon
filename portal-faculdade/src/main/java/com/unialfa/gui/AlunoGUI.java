@@ -23,7 +23,6 @@ public class AlunoGUI extends JFrame {
         setSize(420, 460);
         setLayout(null);
 
-// ===== Nome =====
         JLabel lblNome = new JLabel("Nome:");
         lblNome.setBounds(10, 10, 100, 25);
         add(lblNome);
@@ -31,7 +30,6 @@ public class AlunoGUI extends JFrame {
         txtNome.setBounds(10, 35, 380, 30);
         add(txtNome);
 
-// ===== Matrícula =====
         JLabel lblMatricula = new JLabel("Matrícula (RA - apenas números):");
         lblMatricula.setBounds(10, 70, 250, 25);
         add(lblMatricula);
@@ -39,7 +37,6 @@ public class AlunoGUI extends JFrame {
         txtMatricula.setBounds(10, 95, 380, 30);
         add(txtMatricula);
 
-// trava numérica
         txtMatricula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent e) {
                 char c = e.getKeyChar();
@@ -49,7 +46,6 @@ public class AlunoGUI extends JFrame {
             }
         });
 
-// ===== Email =====
         JLabel lblEmail = new JLabel("Email:");
         lblEmail.setBounds(10, 130, 100, 25);
         add(lblEmail);
@@ -57,7 +53,6 @@ public class AlunoGUI extends JFrame {
         txtEmail.setBounds(10, 155, 380, 30);
         add(txtEmail);
 
-// ===== Curso =====
         JLabel lblCurso = new JLabel("Curso:");
         lblCurso.setBounds(10, 190, 100, 25);
         add(lblCurso);
@@ -65,11 +60,9 @@ public class AlunoGUI extends JFrame {
         txtCurso.setBounds(10, 215, 380, 30);
         add(txtCurso);
 
-// ===== Apto =====
         chkApto.setBounds(10, 255, 200, 25);
         add(chkApto);
 
-// ===== Botão =====
         btnSalvar.setBounds(10, 290, 120, 35);
         add(btnSalvar);
 
@@ -80,7 +73,6 @@ public class AlunoGUI extends JFrame {
 
         btnListar.addActionListener(e -> new ListarAlunoGUI());
 
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
 
