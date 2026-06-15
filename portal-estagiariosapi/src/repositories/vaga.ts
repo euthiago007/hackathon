@@ -83,6 +83,14 @@ return {
 }
 
 async delete(id: number) {
+
+
+  await pool.query(
+    "DELETE FROM candidaturas WHERE vaga_id = ?",
+    [id]
+  );
+
+  
   await pool.query(
     "DELETE FROM vagas WHERE id = ?",
     [id]
